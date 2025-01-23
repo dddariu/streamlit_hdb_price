@@ -19,13 +19,21 @@ st.markdown(
         margin-bottom: 30px;
         color: #333333;
     }
-    .image-container {
-        text-align: center;
-    }
     </style>
-    <div class="image-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/HDB_Flats_in_Singapore.jpg" alt="HDB Flats" style="width: 100%; height: auto; max-height: 300px; object-fit: cover;">
-    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# Display image of HDB flats
+st.image(
+    "https://upload.wikimedia.org/wikipedia/commons/8/80/HDB_Flats_in_Singapore.jpg",
+    caption="HDB Flats in Singapore",
+    use_column_width=True
+)
+
+# Title and subtitle
+st.markdown(
+    """
     <div class="title">HDB Resale Price Prediction</div>
     <div class="subtitle">Enter the flat details below to predict the resale price</div>
     """,
@@ -106,9 +114,9 @@ for col in all_columns:
 
 # Load Pre-Trained Model
 try:
-    clf = joblib.load('hdb_price_predictor.pkl')  # Load your trained model
+    clf = joblib.load('hdb price predictor.pkl')  # Load your trained model
 except FileNotFoundError as e:
-    st.error("Model file not found. Please ensure 'hdb_price_predictor.pkl' is available.")
+    st.error("Model file not found. Please ensure 'hdb price predictor.pkl' is available.")
     st.stop()
 
 # Prediction section
