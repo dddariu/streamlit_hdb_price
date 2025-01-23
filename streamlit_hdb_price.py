@@ -15,7 +15,7 @@ st.sidebar.header('User Input Parameters')
 
 # Function to capture user input
 def user_input_features():
-    floor_area_sqm = st.sidebar.slider('Floor Area (sqm)', 30, 200, 90)
+    floor_area_sqm = st.sidebar.slider('Floor Area (sqm)', 30, 400, 90)
     remaining_lease_year = st.sidebar.slider('Remaining Lease (years)', 0, 99, 75)
     age_of_flat = st.sidebar.slider('Age of Flat (years)', 0, 99, 75)
     town = st.sidebar.selectbox(
