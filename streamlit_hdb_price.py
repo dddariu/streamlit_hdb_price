@@ -36,7 +36,6 @@ def user_input_features():
         ['2-room', '3Gen', 'Adjoined flat', 'Apartment', 'DBSS', 'Improved', 'Improved-Maisonette', 'Maisonette', 'Model A', 'Model A-Maisonette', 'Model A2', 'Multi Generation', 'New Generation', 'Premium Apartment', 'Premium Apartment Loft', 'Premium Maisonette', 'Simplified', 'Standard', 'Terrace', 'Type S1', 'Type S2']
     )
         
-
     # DataFrame for inputs
     data = {
         'floor_area_sqm': floor_area_sqm,
@@ -64,6 +63,12 @@ except FileNotFoundError as e:
     st.error("Required files not found. Please ensure the model and encoders are available.")
     st.stop()
 
+# Apply transformation on 'remaining_lease' to create 'remaining_lease_year' (same as during training)
+df['remaining_lease_year'] = df['remaining_lease'].apply(lambda x: int(str(x)[:2]))
+
+# Drop unnecessary columns (ensure these match the training dataset)
+df = df.drop(['remaining_lease'], axis=1)  # Drop 'remaining_lease' as it's now 'remaining_lease_year'
+
 # Perform One-Hot Encoding
 df = pd.get_dummies(df, columns=['town', 'flat_type', 'storey_range', 'flat_model'])
 
@@ -72,7 +77,8 @@ for col in expected_columns:
     if col not in df:
         df[col] = 0
 
-df = df[expected_columns]  # Reorder to match the training set
+# Reorder columns to match the expected order
+df = df[expected_columns]
 
 # Make predictions
 prediction = clf.predict(df)
