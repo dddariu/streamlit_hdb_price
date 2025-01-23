@@ -76,15 +76,17 @@ data = {
 }
 df = pd.DataFrame(data)
 
-# Load Pre-Trained Model and Column Names
+# Load Pre-Trained Model and Expected Columns
 try:
     clf = joblib.load('hdb price predictor.pkl')  # Load your trained model
+    expected_columns = joblib.load('model_columns.pkl')  # Load the expected column names
 except FileNotFoundError as e:
     st.error("Required files not found. Please ensure the model and encoders are available.")
     st.stop()
 
-# Perform One-Hot Encoding
-df = pd.get_dummies(df, columns=['town', 'flat_type', 'storey_range', 'flat_model'])
+# Perform One-Hot Encoding and Align Columns
+df = pd.get_dummies(df)
+df = df.reindex(columns=expected_columns, fill_value=0)
 
 # Prediction section
 if st.button("🏠 Predict Resale Price 🏠"):
@@ -93,4 +95,4 @@ if st.button("🏠 Predict Resale Price 🏠"):
             prediction = clf.predict(df)
             st.success(f"The predicted resale price for the HDB flat is: **${prediction[0]:,.2f}**")
         except Exception as e:
-            st.error("An error occurred during prediction. Please check your inputs and try again.")
+            st.error(f"An error occurred during prediction: {e}")
