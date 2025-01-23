@@ -58,21 +58,12 @@ st.write(df)
 # Load Pre-Trained Model and Column Names
 try:
     clf = joblib.load('hdb price predictor.pkl')  # Load your trained model
-    expected_columns = joblib.load('expected_columns.pkl')  # Load expected column names from training
 except FileNotFoundError as e:
     st.error("Required files not found. Please ensure the model and encoders are available.")
     st.stop()
 
 # Perform One-Hot Encoding
 df = pd.get_dummies(df, columns=['town', 'flat_type', 'storey_range', 'flat_model'])
-
-# Add missing columns with zeros and reorder columns to match the training set
-for col in expected_columns:
-    if col not in df:
-        df[col] = 0
-
-# Reorder columns to match the expected order
-df = df[expected_columns]
 
 # Make predictions
 prediction = clf.predict(df)
