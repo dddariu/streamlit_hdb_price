@@ -28,7 +28,7 @@ st.markdown(
 
 # User Input section
 def user_inputs():
-    st.sidebar.header("🔧 Input Specifications")
+    st.sidebar.header("Input Details")
     floor_area_sqm = st.sidebar.slider("Floor Area (sqm)", 30, 400, 90)
     remaining_lease_year = st.sidebar.slider("Remaining Lease (years)", 0, 99, 75)
     town = st.sidebar.selectbox(
