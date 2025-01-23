@@ -56,16 +56,27 @@ df = user_input_features()
 st.subheader('User Input Parameters')
 st.write(df)
 
-# Load Pre-trained Model and Encoders
+# Load Pre-Trained Model and Column Names
 try:
     clf = joblib.load('hdb price predictor.pkl')  # Load your trained model
+    expected_columns = joblib.load('expected_columns.pkl')  # Load expected column names from training
 except FileNotFoundError as e:
     st.error("Required files not found. Please ensure the model and encoders are available.")
     st.stop()
 
+# Perform One-Hot Encoding
+df = pd.get_dummies(df, columns=['town', 'flat_type', 'storey_range', 'flat_model'])
+
+# Add missing columns with zeros and reorder columns to match the training set
+for col in expected_columns:
+    if col not in df:
+        df[col] = 0
+
+df = df[expected_columns]  # Reorder to match the training set
+
 # Make predictions
-#prediction = clf.predict(df)
+prediction = clf.predict(df)
 
 # Display results
 st.subheader('Prediction')
-#st.write(f"Estimated Resale Price: **${prediction[0]:,.2f}**")
+st.write(f"Estimated Resale Price: **${prediction[0]:,.2f}**")
