@@ -64,8 +64,8 @@ except FileNotFoundError as e:
     st.stop()
 
 # Make predictions
-prediction = clf.predict(df)
+#prediction = clf.predict(df)
 
 # Display results
 st.subheader('Prediction')
-st.write(f"Estimated Resale Price: **${prediction[0]:,.2f}**")
+#st.write(f"Estimated Resale Price: **${prediction[0]:,.2f}**")
