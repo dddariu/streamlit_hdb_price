@@ -17,7 +17,6 @@ st.sidebar.header('User Input Parameters')
 def user_input_features():
     floor_area_sqm = st.sidebar.slider('Floor Area (sqm)', 30, 400, 90)
     remaining_lease_year = st.sidebar.slider('Remaining Lease (years)', 0, 99, 75)
-    age_of_flat = st.sidebar.slider('Age of Flat (years)', 0, 99, 75)
     town = st.sidebar.selectbox(
         'Town',
         [
@@ -42,7 +41,6 @@ def user_input_features():
     data = {
         'floor_area_sqm': floor_area_sqm,
         'remaining_lease_year': remaining_lease_year,
-        'age_of_flat': age_of_flat,
         'town': town,
         'flat_type': flat_type,
         'storey_range': storey_range,
