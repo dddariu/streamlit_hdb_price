@@ -63,12 +63,6 @@ except FileNotFoundError as e:
     st.error("Required files not found. Please ensure the model and encoders are available.")
     st.stop()
 
-# Apply transformation on 'remaining_lease' to create 'remaining_lease_year' (same as during training)
-df['remaining_lease_year'] = df['remaining_lease'].apply(lambda x: int(str(x)[:2]))
-
-# Drop unnecessary columns (ensure these match the training dataset)
-df = df.drop(['remaining_lease'], axis=1)  # Drop 'remaining_lease' as it's now 'remaining_lease_year'
-
 # Perform One-Hot Encoding
 df = pd.get_dummies(df, columns=['town', 'flat_type', 'storey_range', 'flat_model'])
 
