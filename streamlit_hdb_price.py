@@ -64,7 +64,7 @@ except FileNotFoundError as e:
     st.stop()
 
 #df['remaining_lease_year'] = df['remaining_lease'].apply(lambda x: int(x[:2]))
-df = df.drop(['block', 'street_name', 'month', 'remaining_lease', 'lease_commence_date'], axis=1)
+#df = df.drop(['block', 'street_name', 'month', 'remaining_lease', 'lease_commence_date'], axis=1)
 # Perform One-Hot Encoding
 df = pd.get_dummies(df, columns=['town', 'flat_type', 'storey_range', 'flat_model'])
 
