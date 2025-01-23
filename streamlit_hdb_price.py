@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# App title with styling
+# App title with styling and HDB image
 st.markdown(
     """
     <style>
@@ -11,7 +11,7 @@ st.markdown(
         font-weight: bold;
         color: #4CAF50;
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     .subtitle {
         font-size: 18px;
@@ -19,7 +19,13 @@ st.markdown(
         margin-bottom: 30px;
         color: #333333;
     }
+    .image-container {
+        text-align: center;
+    }
     </style>
+    <div class="image-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/HDB_Flats_in_Singapore.jpg" alt="HDB Flats" style="width: 100%; height: auto; max-height: 300px; object-fit: cover;">
+    </div>
     <div class="title">HDB Resale Price Prediction</div>
     <div class="subtitle">Enter the flat details below to predict the resale price</div>
     """,
@@ -29,7 +35,7 @@ st.markdown(
 # User Input section
 def user_inputs():
     st.sidebar.header("Input Details")
-    floor_area_sqm = st.sidebar.slider("Floor Area (sqm)", 30, 400, 90)
+    floor_area_sqm = st.sidebar.slider("Floor Area (sqm)", 0, 500, 90)
     remaining_lease_year = st.sidebar.slider("Remaining Lease (years)", 0, 99, 75)
     town = st.sidebar.selectbox(
         "Town",
@@ -59,7 +65,7 @@ def user_inputs():
 floor_area_sqm, remaining_lease_year, town, flat_type, storey_range, flat_model = user_inputs()
 
 # Display input data summary
-st.markdown("### Your Flat Specifications ###")
+st.markdown("### Your Flat Specifications")
 st.table({
     "Specification": ["Floor Area (sqm)", "Remaining Lease (years)", "Town", "Flat Type", "Storey Range", "Flat Model"],
     "Value": [floor_area_sqm, remaining_lease_year, town, flat_type, storey_range, flat_model]
@@ -100,9 +106,9 @@ for col in all_columns:
 
 # Load Pre-Trained Model
 try:
-    clf = joblib.load('hdb price predictor.pkl')  # Load your trained model
+    clf = joblib.load('hdb_price_predictor.pkl')  # Load your trained model
 except FileNotFoundError as e:
-    st.error("Model file not found. Please ensure 'hdb price predictor.pkl' is available.")
+    st.error("Model file not found. Please ensure 'hdb_price_predictor.pkl' is available.")
     st.stop()
 
 # Prediction section
