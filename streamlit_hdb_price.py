@@ -28,7 +28,7 @@ st.markdown(
 st.image(
     "https://upload.wikimedia.org/wikipedia/commons/8/80/HDB_Flats_in_Singapore.jpg",
     caption="HDB Flats in Singapore",
-    use_column_width=True
+    use_container_width=True  # Updated parameter
 )
 
 # Title and subtitle
