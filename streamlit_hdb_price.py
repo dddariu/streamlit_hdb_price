@@ -59,7 +59,7 @@ st.write(df)
 
 # Load Pre-trained Model and Encoders
 try:
-    clf = joblib.load('hdb_price_predictor.pkl')  # Load your trained model
+    clf = joblib.load('hdb price predictor.pkl')  # Load your trained model
 except FileNotFoundError as e:
     st.error("Required files not found. Please ensure the model and encoders are available.")
     st.stop()
