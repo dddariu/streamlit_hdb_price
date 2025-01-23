@@ -60,20 +60,8 @@ st.write(df)
 # Load Pre-trained Model and Encoders
 try:
     clf = joblib.load('hdb_price_predictor.pkl')  # Load your trained model
-    le_flat_type = joblib.load('le_flat_type.pkl')  # LabelEncoder for flat_type
-    le_town = joblib.load('le_town.pkl')  # LabelEncoder for town
-    le_storey_range = joblib.load('le_storey_range.pkl')  # LabelEncoder for storey_range
 except FileNotFoundError as e:
     st.error("Required files not found. Please ensure the model and encoders are available.")
-    st.stop()
-
-# Encode user inputs
-try:
-    df['flat_type'] = le_flat_type.transform(df['flat_type'])
-    df['town'] = le_town.transform(df['town'])
-    df['storey_range'] = le_storey_range.transform(df['storey_range'])
-except ValueError as e:
-    st.error("Error encoding user inputs. Please ensure values match the trained dataset.")
     st.stop()
 
 # Make predictions
