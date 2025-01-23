@@ -25,11 +25,7 @@ st.markdown(
 )
 
 # Display image of HDB flats
-st.image(
-    "https://upload.wikimedia.org/wikipedia/commons/8/80/HDB_Flats_in_Singapore.jpg",
-    caption="HDB Flats in Singapore",
-    use_container_width=True  # Updated parameter
-)
+st.image("hdb_picture.jpg", caption="HDB Flats in Singapore", use_container_width=True)
 
 # Title and subtitle
 st.markdown(
